@@ -1,23 +1,23 @@
 {
-  "name": "app-electron-",
+  "name": "appelectron-",
   "version": "1.0.0",
-  "description": "Desenvolvendo aplicação desktop simples com Electron",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "start": "electron ."
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/robsonad18/app-electron-.git"
+    "url": "git+https://github.com/robsonad18/appElectron-.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/robsonad18/app-electron-/issues"
+    "url": "https://github.com/robsonad18/appElectron-/issues"
   },
-  "homepage": "https://github.com/robsonad18/app-electron-#readme",
+  "homepage": "https://github.com/robsonad18/appElectron-#readme",
   "dependencies": {
-    "electron": "^16.0.4"
+    "electron": "^6.1.12"
   }
 }

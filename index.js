@@ -1,59 +1,65 @@
-const { app, BrowserWindow, Menu } = require('electron');
+const { app, BrowserWindow, Menu } = require("electron");
 
-// window main
 var mainWindow = null;
+
 async function createWindow() {
     mainWindow = new BrowserWindow({
-        width:500,
-        height:500
+        width: 800,
+        height: 600,
+        webPreferences:{
+            nodeIntegration:true
+        }
     });
 
-    await mainWindow.loadFile('src/pages/editor/index.html');
+    await mainWindow.loadFile("src/pages/editor/index.html")
+
+    mainWindow.webContents.openDevTools()
 }
 
-// file
-var file = {};
-// create file
+var file = {}
+// criar novo arquivo
 function createNewFile() {
     file = {
-        name:"novo-arquivo.txt",
-        content:"",
-        saved:false,
-        path: app.getPath('documents')+"/novo-arquivo.txt"
+        name: "novo-arquivo.txt",
+        content: "",
+        saved: false,
+        path: app.getPath("documents")+"/novo-arquivo.txt"
     }
+
+    mainWindow.webContents.send("set-file", file)
 }
 
 // template menu
 const templateMenu = [
     {
-        label:"Arquivo",
+        label: "Arquivo",
         submenu: [
             {
-                label:"Novo",
+                label: "Novo",
                 click() {
-                    createNewFile()
+                    createNewFile();
                 }
-            },{
-                label:"Abrir"
-            },{
-                label:"Salvar como"
-            },{
-                label:"Fechar",
-                role: process.platform === "darwin" ? "close" : "quit"
+            }, {
+                label: "Abrir"
+            }, {
+                label: "Salvar"
+            }, {
+                label: "Salvar como"
+            }, {
+                label: "Fechar",
+                role: process.platform == "darwin" ? "close" : "quit"
             }
         ]
     }
 ];
 
 // menu
-const menu = Menu.buildFromTemplate(templateMenu);
+const menu = Menu.buildFromTemplate(templateMenu)
 Menu.setApplicationMenu(menu);
 
-// on ready
 app.whenReady().then(createWindow);
 
-// activate
-app.on('activate', () => {
+app.on("activate", () => {
     if (BrowserWindow.getAllWindows().length === 0) {
         createWindow();
     }
